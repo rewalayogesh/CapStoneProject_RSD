@@ -1,0 +1,150 @@
+[cloudera@quickstart ~]$ hive
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+WARNING: Hive CLI is deprecated and migration to Beeline is recommended.
+hive> show databases;
+OK
+capstone
+default
+export_db
+Time taken: 0.031 seconds, Fetched: 3 row(s)
+hive> use capstone;
+OK
+Time taken: 0.028 seconds
+hive> show tables;
+OK
+cities_crosswalk
+city_data
+Time taken: 0.03 seconds, Fetched: 3 row(s)
+hive> create table AvgPropertyPrice(Region STRING, City STRING, Country STRING, State STRING, Year INT, AveragePropertyPrice FLOAT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES;
+hive> LOAD DATA INPATH '/Avg_Property_Price/part-00000-1e49aa67-3b94-468a-9740-ce4b55c1a85a-c000.csv' INTO TABLE AvgPropertyPrice;
+Loading data to table capstone.avgpropertyprice
+Table capstone.avgpropertyprice stats: [numFiles=1, totalSize=162670472]
+OK
+Time taken: 0.504 seconds
+hive> select * from AvgPropertyPrice limit 10;
+OK
+abbottstownadamspa	Abbottstown	Adams	PA	2007	155700.0
+abingtonplymouthma	Abington	Plymouth	MA	2014	272500.0
+accidentgarrettmd	Accident	Garrett	MD	1997	71700.0
+actonmiddlesexma	Acton	Middlesex	MA	2017	542100.0
+adamstownfrederickmd	Adamstown	Frederick	MD	2016	416800.0
+addisonlenaweemi	Addison	Lenawee	MI	2014	126300.0
+akronsummitoh	Akron	Summit	OH	2002	77500.0
+alachuaalachuafl	Alachua	Alachua	FL	1996	89200.0
+alamosaalamosaco	Alamosa	Alamosa	CO	2006	128100.0
+alcoablounttn	Alcoa	Blount	TN	2017	116500.0
+Time taken: 0.123 seconds, Fetched: 10 row(s)
+hive> select count(*) from AvgPropertyPrice;
+Query ID = cloudera_20230920155757_7fbae4d1-89cf-4319-bfbe-247c08d82040
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1695115881461_0008, Tracking URL = http://quickstart.cloudera:8088/proxy/application_1695115881461_0008/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1695115881461_0008
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2023-09-20 15:58:24,418 Stage-1 map = 0%,  reduce = 0%
+2023-09-20 15:58:56,483 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 8.88 sec
+2023-09-20 15:59:19,329 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 11.64 sec
+MapReduce Total cumulative CPU time: 11 seconds 640 msec
+Ended Job = job_1695115881461_0008
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 11.64 sec   HDFS Read: 162682846 HDFS Write: 8 SUCCESS
+Total MapReduce CPU Time Spent: 11 seconds 640 msec
+OK
+2827727
+Time taken: 87.495 seconds, Fetched: 1 row(s)
+hive> create table TopRegionsZHVI(Region STRING,ZHVIPropertyPrice FLOAT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' TBLPROPERTIES("skip.header.line.count"="1");
+OK
+Time taken: 0.309 seconds
+hive> LOAD DATA INPATH '/Top_Regions_ZHVI/part-00000-f2695058-780b-4b35-9136-472c4f223293-c000.csv' INTO TABLE TopRegionsZHVI;
+Loading data to table capstone.topregionszhvi
+Table capstone.topregionszhvi stats: [numFiles=1, totalSize=385]
+OK
+Time taken: 0.604 seconds
+hive> select * from TopRegionsZHVI limit 5;
+OK
+jupiter_islandmartinfl	3891040.2
+athertonsan_mateoca	3481490.5
+hillsboroughsan_mateoca	3407128.0
+rolling_hillslos_angelesca	3391510.8
+water_millsuffolkny	3185650.0
+Time taken: 0.185 seconds, Fetched: 5 row(s)
+hive> select count(*) from TopRegionsZHVI;
+Query ID = cloudera_20230920162626_5464e7d2-4756-403d-9358-c2b25fe82773
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1695115881461_0009, Tracking URL = http://quickstart.cloudera:8088/proxy/application_1695115881461_0009/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1695115881461_0009
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2023-09-20 16:26:25,258 Stage-1 map = 0%,  reduce = 0%
+2023-09-20 16:26:39,362 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.85 sec
+2023-09-20 16:26:56,237 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 4.14 sec
+MapReduce Total cumulative CPU time: 4 seconds 140 msec
+Ended Job = job_1695115881461_0009
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 4.14 sec   HDFS Read: 8073 HDFS Write: 3 SUCCESS
+Total MapReduce CPU Time Spent: 4 seconds 140 msec
+OK
+10
+Time taken: 51.075 seconds, Fetched: 1 row(s)
+hive> create table TopRegionsZRI(Region STRING,ZRI_Property_Price FLOAT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' TBLPROPERTIES("skip.header.line.count"="1");
+OK
+Time taken: 0.194 seconds
+hive> LOAD DATA INPATH '/Top_Regions_ZRI/part-00000-c1a64aba-d6db-4049-9348-46c427e4a41a-c000.csv' INTO TABLE TopRegionsZRI;
+Loading data to table capstone.topregionszri
+Table capstone.topregionszri stats: [numFiles=1, totalSize=356]
+OK
+Time taken: 0.633 seconds
+hive> SELECT * FROM TopRegionsZri;
+OK
+jupiter_islandmartinfl	20821.78
+fisher_islandmiami_dadefl	15138.4
+athertonsan_mateoca	14063.99
+belvederemarinca	10620.15
+hidden_hillslos_angelesca	10425.91
+hillsboroughsan_mateoca	10165.71
+rancho_santa_fesan_diegoca	9804.22
+beverly_hillslos_angelesca	9764.19
+sands_pointnassauny	9756.3
+portola_valleysan_mateoca	9414.3
+Time taken: 0.165 seconds, Fetched: 10 row(s)
+hive> select count(*) from TopRegionsZRI;
+Query ID = cloudera_20230920163434_bf878781-c138-41d4-b981-db2d3de7b1d3
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1695115881461_0010, Tracking URL = http://quickstart.cloudera:8088/proxy/application_1695115881461_0010/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1695115881461_0010
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2023-09-20 16:34:48,659 Stage-1 map = 0%,  reduce = 0%
+2023-09-20 16:35:07,284 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.8 sec
+2023-09-20 16:35:22,782 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 4.04 sec
+MapReduce Total cumulative CPU time: 4 seconds 40 msec
+Ended Job = job_1695115881461_0010
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 4.04 sec   HDFS Read: 8036 HDFS Write: 3 SUCCESS
+Total MapReduce CPU Time Spent: 4 seconds 40 msec
+OK
+10
+Time taken: 52.823 seconds, Fetched: 1 row(s)
+hive> 
+

@@ -1,0 +1,31 @@
+[cloudera@quickstart ~]$ hadoop version
+Hadoop 2.6.0-cdh5.13.0
+Subversion http://github.com/cloudera/hadoop -r 42e8860b182e55321bd5f5605264da4adc8882be
+Compiled by jenkins on 2017-10-04T18:08Z
+Compiled with protoc 2.5.0
+From source with checksum 5e84c185f8a22158e2b0e4b8f85311
+This command was run using /usr/lib/hadoop/hadoop-common-2.6.0-cdh5.13.0.jar
+[cloudera@quickstart ~]$ hadoop fs -ls
+Found 3 items
+drwxr-xr-x   - cloudera cloudera          0 2023-07-28 00:08 clickstream_data
+drwxr-xr-x   - cloudera cloudera          0 2023-07-28 00:16 customer_data
+drwxr-xr-x   - cloudera cloudera          0 2023-07-28 00:13 purchase_data
+[cloudera@quickstart ~]$ hadoop fs -copyFromLocal /home/cloudera/capstone_project/City_time_series.csv
+[cloudera@quickstart ~]$ hadoop fs -copyFromLocal /home/cloudera/capstone_project/cities_crosswalk.csv
+[cloudera@quickstart ~]$ 
+[cloudera@quickstart ~]$ hadoop fs -ls
+Found 6 items
+-rw-r--r--   1 cloudera cloudera  689627012 2023-09-19 05:51 City_time_series.csv
+drwxr-xr-x   - cloudera cloudera          0 2023-09-19 05:48 capstone_project
+-rw-r--r--   1 cloudera cloudera    1074309 2023-09-19 05:51 cities_crosswalk.csv
+drwxr-xr-x   - cloudera cloudera          0 2023-07-28 00:08 clickstream_data
+drwxr-xr-x   - cloudera cloudera          0 2023-07-28 00:16 customer_data
+drwxr-xr-x   - cloudera cloudera          0 2023-07-28 00:13 purchase_data
+[cloudera@quickstart ~]$ hadoop fs -ls
+Found 5 items
+-rw-r--r--   1 cloudera cloudera  689627012 2023-09-19 05:51 City_time_series.csv
+-rw-r--r--   1 cloudera cloudera    1074309 2023-09-19 05:51 cities_crosswalk.csv
+drwxr-xr-x   - cloudera cloudera          0 2023-07-28 00:08 clickstream_data
+drwxr-xr-x   - cloudera cloudera          0 2023-07-28 00:16 customer_data
+drwxr-xr-x   - cloudera cloudera          0 2023-07-28 00:13 purchase_data
+[cloudera@quickstart ~]$
