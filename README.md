@@ -70,7 +70,7 @@ Generate reports, dashboards, and visualizations using tools like Apache Superse
 
 Overall architecture flow: 
  
-CSV --> HDFS -->HIVE-->SPARK-> HIVE-TABLE --> HIVE-QUERY --> POWER-BI
+CSV --> HDFS -->HIVE-->SPARK--> HIVE TABLE --> HIVE QUERY --> POWER BI
  
 
  
@@ -131,3 +131,4 @@ For all these tasks, you can use the Zillow Economics Data(https://www.kaggle.co
 Tools required to achieve the end dashboard: 
 Hadoop (hdfs, hive, spark) 
 Tableau/Power BI 
+
