@@ -372,3 +372,45 @@ Total MapReduce CPU Time Spent: 5 seconds 370 msec
 OK
 0
 Time taken: 63.772 seconds, Fetched: 1 row(s)
+
+
+**************************************************************************************
+hive> select Year, max(PropertyPriceByZHVI) as ZHVImax,
+min(PropertyPriceByZHVI) as minZHVI, max(PropertyPriceByZRI) as
+maxZRI, min(PropertyPriceByZRI) as minZRI from PropertyPrice GROUP BY
+Year;
+Query ID = cloudera_20230922044747_a0149dd4-4ac4-426c-9510-59a035a4cf00
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1695115881461_0028, Tracking URL =
+http://quickstart.cloudera:8088/proxy/application_1695115881461_0028/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1695115881461_0028
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2023-09-22 04:47:49,208 Stage-1 map = 0%,  reduce = 0%
+2023-09-22 04:48:31,628 Stage-1 map = 100%,  reduce = 0%, Cumulative
+CPU 10.31 sec
+2023-09-22 04:48:58,806 Stage-1 map = 100%,  reduce = 100%, Cumulative
+CPU 13.9 sec
+MapReduce Total cumulative CPU time: 13 seconds 900 msec
+Ended Job = job_1695115881461_0028
+MapReduce Jobs Launched:
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 13.9 sec   HDFS
+Read: 59025250 HDFS Write: 296 SUCCESS
+Total MapReduce CPU Time Spent: 13 seconds 900 msec
+OK
+2010    3125200.0       29300.0 19242.0 584.0
+2011    3225000.0       28500.0 21496.0 537.0
+2012    3978700.0       27600.0 21373.0 505.0
+2013    4087500.0       26100.0 22303.0 507.0
+2014    4581200.0       27000.0 23325.0 512.0
+2015    5651800.0       27900.0 22637.0 505.0
+2016    6249400.0       27800.0 23095.0 517.0
+2017    7257800.0       30100.0 18759.0 517.0
+Time taken: 115.237 seconds, Fetched: 8 row(s)
